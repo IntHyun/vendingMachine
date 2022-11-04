@@ -1,0 +1,296 @@
+@charset 'utf-8';
+
+/* 유틸리티 스타일 */
+.ir {
+    position: absolute;
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.img-item {
+    /* display를 block으로 하는 이유는 이미지가 가지고있는 baseline 때문에. */
+    display: block;
+}
+
+/* 스크롤바 디자인 */
+ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+/* 레이아웃 */
+body {
+    background-color: #eae8fe;
+}
+
+#app {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0 28px;
+    padding-top: 247px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+}
+
+#app .tit-app {
+    position: absolute;
+    width: 386px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#app .vending-machine,
+#app .my-info {
+    flex-basis: 360px;
+}
+
+#app .tit-app .img-item {
+    width: 100%;
+}
+
+/* 자판기 스타일 */
+
+#app .vending-machine {
+    padding: 31px 27px 28px;
+    background-color: #fff;
+}
+
+.vending-machine .list-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+.vending-machine .list-item li {
+    /* 품절 이미지 위치잡기위해 포지션 줬음 품절이미지에도 포지션주면 얘가 기준 */
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+
+.vending-machine .list-item li.sold-out::before {
+    display: block;
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    border-radius: 10px;
+    background: no-repeat center/ 60px 46px url(../src/images/Sold-out.png)
+        rgba(0, 0, 0, 0.8);
+}
+
+.vending-machine .list-item li.sold-out {
+    pointer-events: none;
+}
+
+.vending-machine .btn-item {
+    width: 100%;
+    padding: 11px 12px 9px;
+}
+
+.vending-machine .btn-item:active {
+    /* border는 레이아웃에 영향을 미치므로 아웃라인으로 처리 */
+    outline: 3px solid #6327fe;
+    border-radius: 10px;
+}
+
+.vending-machine .list-item .img-item {
+    width: 36px;
+    height: 65px;
+    margin: 0 auto;
+}
+
+.vending-machine .tit-item {
+    display: block;
+    margin: 6px 0 7px;
+    font-size: 9px;
+}
+
+.vending-machine .txt-price {
+    display: block;
+    padding: 5px 15px;
+    font-size: 12px;
+    background-color: #6327fe;
+    border-radius: 50px;
+    color: #fff;
+}
+
+/* 잔액, 입금, 획득 스타일 */
+
+.vending-machine .cont-buy {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.cont-buy .info-balance,
+.cont-buy .inp-put,
+.cont-buy .list-item-staged {
+    /* 2fr 1fr 을 하지 않은 이유는 위에서 grid설정할 때 1fr 1fr 1fr해줬기 때문 */
+    grid-column: 1/3;
+    border-radius: 5px;
+}
+
+/* 공통적으로 가지고있는 스타일 요소를 적용해줍니다. */
+.cont-buy .btn-return,
+.cont-buy .btn-put,
+.cont-buy .btn-get {
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+    font-size: 13px;
+}
+
+.cont-buy .btn-get {
+    background-color: #6327fe;
+    color: #fff;
+}
+
+.cont-buy .info-balance {
+    background-color: #eae8fe;
+    padding: 6px 10px;
+}
+
+.info-balance .txt-balance {
+    float: right;
+}
+
+.cont-buy .inp-put {
+    padding: 6px;
+    border: 1px solid #bdbdbd;
+}
+
+/* 높이 값을 설정해주는 이유는 스크롤을 생성해주기 위해서 */
+.list-item-staged {
+    height: 106px;
+    padding: 12px;
+    overflow-y: scroll;
+    border: 1px solid #bdbdbd;
+    background-color: #eae8fe;
+    border-radius: 5px;
+}
+
+/* cont-buy 를 뺀 이유는 공통적으로 동일하게 적용해주기 위해 */
+.list-item-staged li {
+    /* padding: 8px; => 버튼에 들어있는 li이므로 padding을 li에 주면 버튼을 클릭할 수 있는 공간이 좁아지기 떄문에 버튼에 패딩을 주자*/
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.list-item-staged li + li {
+    margin-top: 6px;
+}
+
+/*  */
+
+.list-item-staged .img-item,
+.list-item-staged .txt-item {
+    float: left;
+}
+
+.list-item-staged .btn-staged {
+    width: 100%;
+    /* 버튼에다 패딩을 준info 이유는 사용자가 클릭할 수 있는 버튼의 영역이 li에주면 좁아지는데 버튼에주면 넓어짐. */
+    padding: 8px;
+}
+
+.list-item-staged .txt-item {
+    margin-left: 10px;
+    line-height: 32px;
+    font-size: 9px;
+}
+
+.list-item-staged .num-counter {
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+}
+
+.list-item-staged .img-item {
+    width: 18px;
+    height: 32px;
+}
+
+/* 나의 정보 스타일 */
+
+.my-info .cont-mymoney {
+    padding: 9px 27px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.my-info .info-mymoney {
+    padding: 6px 10px;
+    background-color: #eae8fe;
+    border-radius: 5px;
+    line-height: 20px;
+}
+
+.info-mymoney .txt-mymoney {
+    float: right;
+    font-weight: 700;
+}
+
+.my-info .cont-myitems {
+    padding: 25px 27px 26px;
+    background-color: #fff;
+}
+
+.cont-myitems .tit-myitem {
+    /* 디스플레이 블럭을 써서 공간을 확보한 뒤 텍스트 얼라인 센터! */
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 13px;
+    line-height: 20px;
+}
+
+.my-info .list-item-staged {
+    height: 368px;
+}
+
+.my-info .list-item-staged li {
+    overflow: hidden;
+    padding: 8px;
+}
+
+.my-info .txt-total {
+    display: block;
+    text-align: right;
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 17px;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    /* 온리는 안전하게 넣는게 좋음 */
+    body {
+        background-color: #fff;
+    }
+
+    #app {
+        padding-top: 96px;
+    }
+
+    #app .tit-app {
+        width: 166px;
+    }
+}
