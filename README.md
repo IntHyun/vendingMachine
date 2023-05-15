@@ -2,7 +2,7 @@
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/68059880/210050107-d56dca13-4ced-4073-8964-6a9f466aac2f.gif)
 
-<a href="#">▶️ 벤딩머신 사용해보러 가기</a>
+<a href="https://inthyun.github.io/vendingMachine/index.html">▶️ 벤딩머신 사용해보러 가기</a>
 
 <br><br>
 
